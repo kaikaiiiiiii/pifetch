@@ -9,12 +9,16 @@ const piloop = async function (max) {
         console.log(start);
         var addcontent = await axios.get('https://api.pi.delivery/v1/pi', {
             params: {'start':start, 'numberOfDigits': 1000}
+        }).catch(function (error) {
+            console.log(error);
         });
         var moredigits = addcontent.data.content;
         fs.appendFileSync('pi.txt', moredigits, 'utf-8');
         start += 1000;
     }
-    console.log('ends');
+    console.log(max+': ends');
 }
 
-piloop(100000000);
+piloop(5000000);//500万位
+piloop(100000000);//1亿位
+piloop(50000000000000);//50万亿位
