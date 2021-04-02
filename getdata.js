@@ -3,7 +3,6 @@ const fs = require('fs');
 var local = fs.existsSync('pi.txt') ? fs.readFileSync('pi.txt', 'utf-8') : '';
 
 const piloop = async function (max) {
-    
     var start = local.length; //start 值等于『小数点后第 n 位』
     while (start < max) {
         var addcontent = await axios.get('https://api.pi.delivery/v1/pi', {
@@ -16,6 +15,7 @@ const piloop = async function (max) {
             fs.appendFileSync('pi.txt', moredigits, 'utf-8');
             start += 1000;
         }
+        console.log(start);
     }
     console.log(max + ': ends');
 };
